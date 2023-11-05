@@ -1,4 +1,4 @@
-package main.herramientas;
+package herramientas;
 
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
@@ -6,7 +6,13 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -25,7 +31,7 @@ public class CargadorRecursos {
         Image imagen = null;
 
         try {
-            imagen = ImageIO.read(CargadorRecursos.class.getResource(ruta));
+            imagen = ImageIO.read(new File(ruta));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,7 +59,7 @@ public class CargadorRecursos {
         Image imagen = null;
 
         try {
-            imagen = ImageIO.read(CargadorRecursos.class.getResource(ruta));
+            imagen = ImageIO.read(new File(ruta));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,4 +77,20 @@ public class CargadorRecursos {
         return imagenAcelerada;
     }
 
+    public static String leerArchivoTexto(final String ruta) {
+        StringBuilder contenido = new StringBuilder();
+
+        try {
+            InputStream entradaBytes = ClassLoader.getSystemResourceAsStream(ruta);
+            BufferedReader lector = new BufferedReader(new InputStreamReader(entradaBytes));
+
+            String linea;
+            while ((linea = lector.readLine()) != null) {
+                contenido.append(linea).append(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return contenido.toString();
+    }
 }

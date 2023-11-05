@@ -1,8 +1,8 @@
-package main.sprites;
+package sprites;
 
 import java.awt.image.BufferedImage;
 
-import main.herramientas.CargadorRecursos;
+import herramientas.CargadorRecursos;
 
 // Clase que representa una hoja de sprites
 public class SpritesSheet {

@@ -1,7 +1,7 @@
 // Importamos las clases necesarias
-package main.maquinaestado;
+package maquinaestado;
 
-import main.maquinaestado.estados.juego.GestorJuego;
+import maquinaestado.estados.juego.GestorJuego;
 import java.awt.Graphics;
 
 // Definimos la clase GestorEstado

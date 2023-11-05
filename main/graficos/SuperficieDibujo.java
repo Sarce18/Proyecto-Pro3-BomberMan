@@ -1,4 +1,4 @@
-package main.graficos;
+package graficos;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -7,8 +7,8 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 
-import main.control.Keyboard;
-import main.maquinaestado.GestorEstado;
+import control.Keyboard;
+import maquinaestado.GestorEstado;
 
 public class SuperficieDibujo extends Canvas {
 
@@ -76,7 +76,5 @@ public class SuperficieDibujo extends Canvas {
     public void setKeyboard(Keyboard keyboard) {
         this.keyboard = keyboard;
     }
-
-    
 
 }

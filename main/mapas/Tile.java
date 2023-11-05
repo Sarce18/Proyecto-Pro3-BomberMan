@@ -1,8 +1,8 @@
-package main.mapas;
+package mapas;
 
 import java.awt.Rectangle;
 
-import main.sprites.Sprite;
+import sprites.Sprite;
 
 public class Tile {
     private final Sprite sprite;

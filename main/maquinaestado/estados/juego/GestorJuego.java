@@ -1,10 +1,13 @@
-package main.maquinaestado.estados.juego;
+package maquinaestado.estados.juego;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import main.maquinaestado.EstadoJuego;
-import main.sprites.SpritesSheet;
+import herramientas.CargadorRecursos;
+import mapas.Mapa;
+import maquinaestado.EstadoJuego;
+import sprites.SpritesSheet;
 
 /**
  * Clase que implementa el estado de juego y se encarga de gestionar el mapa y
@@ -13,7 +16,12 @@ import main.sprites.SpritesSheet;
 public class GestorJuego implements EstadoJuego {
 
     private GestorMapa gm;
-    SpritesSheet ss = new SpritesSheet("/recursos/imagenes/hojatexturas/001.png", 32, true);
+    // SpritesSheet ss = new SpritesSheet("recursos/imagenes/hojatexturas/1.png",
+    // 32, true);
+
+    // String texto = CargadorRecursos.leerArchivoTexto("texto/mapa.txt");
+
+    Mapa mapa = new Mapa("texto/mapa.txt");
 
     public void actualizar() {
 
@@ -26,8 +34,7 @@ public class GestorJuego implements EstadoJuego {
      * @param g El objeto Graphics utilizado para dibujar.
      */
     public void dibujar(Graphics g) {
-        BufferedImage imagen = ss.getSprite(2, 0).getImagen();
-        g.drawImage(imagen, 100, 100, null);
+        mapa.dibujar(g);
 
     }
 

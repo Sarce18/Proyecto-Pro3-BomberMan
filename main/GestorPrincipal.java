@@ -1,8 +1,7 @@
-package main;
 
-import main.graficos.SuperficieDibujo;
-import main.graficos.Ventana;
-import main.maquinaestado.GestorEstado;
+import graficos.SuperficieDibujo;
+import graficos.Ventana;
+import maquinaestado.GestorEstado;
 
 /**
  * Clase que representa el gestor principal del juego.

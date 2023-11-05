@@ -1,4 +1,4 @@
-package main.maquinaestado;
+package maquinaestado;
 
 import java.awt.Graphics;
 
