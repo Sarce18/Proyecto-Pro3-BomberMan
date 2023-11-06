@@ -7,7 +7,9 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 
+import control.GestorControles;
 import control.Keyboard;
+import control.Mouse;
 import maquinaestado.GestorEstado;
 
 /**
@@ -20,7 +22,7 @@ public class SuperficieDibujo extends Canvas {
 
     private int ancho, alto;
 
-    private Keyboard keyboard;
+    private Mouse mouse;
 
     /**
      * Constructor de la clase SuperficieDibujo.
@@ -32,11 +34,12 @@ public class SuperficieDibujo extends Canvas {
         this.ancho = ancho;
         this.alto = alto;
 
-        keyboard = new Keyboard();
+        this.mouse = new Mouse();
 
+        setCursor(mouse.getCursor());
         setIgnoreRepaint(true);
         setPreferredSize(new Dimension(ancho, alto));
-        addKeyListener(keyboard);
+        addKeyListener(GestorControles.keyboard);
         setFocusable(true);
         requestFocus();
     }
@@ -87,15 +90,6 @@ public class SuperficieDibujo extends Canvas {
     }
 
     /**
-     * Método que devuelve el teclado asociado a la superficie de dibujo.
-     * 
-     * @return Teclado asociado a la superficie de dibujo.
-     */
-    public Keyboard getKeyboard() {
-        return keyboard;
-    }
-
-    /**
      * Método que establece el ancho de la superficie de dibujo.
      * 
      * @param ancho Nuevo ancho de la superficie de dibujo.
@@ -111,15 +105,6 @@ public class SuperficieDibujo extends Canvas {
      */
     public void setAlto(int alto) {
         this.alto = alto;
-    }
-
-    /**
-     * Método que establece el teclado asociado a la superficie de dibujo.
-     * 
-     * @param keyboard Nuevo teclado asociado a la superficie de dibujo.
-     */
-    public void setKeyboard(Keyboard keyboard) {
-        this.keyboard = keyboard;
     }
 
 }

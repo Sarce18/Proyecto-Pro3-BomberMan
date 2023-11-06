@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import entes.Constantes;
 import herramientas.CargadorRecursos;
 import sprites.Sprite;
 import sprites.SpritesSheet;
@@ -134,17 +135,17 @@ public class Mapa {
     }
 
     // Método que dibuja el mapa en pantalla
-    public void dibujar(Graphics g) {
+    public void dibujar(Graphics g, int posicionX, int posicionY) {
 
         // Se obtiene el ancho y alto de los sprites
-        int anchoSprite = this.paleta[0].getAncho();
-        int altoSprite = this.paleta[0].getAlto();
+        int anchoSprite = Constantes.LADO_SPRITE;
+        int altoSprite = anchoSprite;
 
         // Se dibuja cada sprite en su posición correspondiente
         for (int y = 0; y < this.alto; y++) {
             for (int x = 0; x < this.ancho; x++) {
                 BufferedImage imagen = paleta[sprites[x + y * this.ancho]].getImagen();
-                g.drawImage(imagen, x * anchoSprite, y * altoSprite, null);
+                g.drawImage(imagen, x * anchoSprite - posicionX + 304, y * altoSprite - posicionY + 164, null);
             }
         }
     }

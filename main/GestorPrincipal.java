@@ -1,4 +1,6 @@
 
+import control.GestorControles;
+import entes.Constantes;
 import graficos.SuperficieDibujo;
 import graficos.Ventana;
 import maquinaestado.GestorEstado;
@@ -45,7 +47,10 @@ public class GestorPrincipal {
      * @param args Argumentos de la línea de comandos.
      */
     public static void main(String[] args) {
-        GestorPrincipal gp = new GestorPrincipal("Juego", 800, 600);
+        GestorPrincipal gp = new GestorPrincipal("Juego", 640, 360);
+
+        Constantes.ANCHO_PANTALLA = 640;
+        Constantes.ALTO_PANTALLA = 360;
 
         gp.iniciarJuego();
         gp.buclePrincipal();
@@ -120,7 +125,7 @@ public class GestorPrincipal {
      * Método que actualiza los componentes del juego.
      */
     private void actualizar() {
-        sd.getKeyboard().actualizar();
+        GestorControles.keyboard.actualizar();
         ge.actualizar();
     }
 

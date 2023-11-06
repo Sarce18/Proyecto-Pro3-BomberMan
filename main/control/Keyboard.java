@@ -7,17 +7,17 @@ import java.awt.event.KeyListener;
 public class Keyboard implements KeyListener {
 
     // Constante que representa el número de teclas
-    private final static int NUMERO_TECLAS = 256;
+    private final int numeroTeclas = 256;
     // Arreglo de booleanos que indica si una tecla está presionada o no
-    private final boolean[] teclas = new boolean[NUMERO_TECLAS];
+    private final boolean[] teclas = new boolean[numeroTeclas];
 
     // Variables públicas que indican si una tecla específica está presionada o no
-    public boolean arriba;
-    public boolean abajo;
-    public boolean izquierda;
-    public boolean derecha;
-    public boolean correr;
-    public boolean salir;
+    private boolean arriba;
+    private boolean abajo;
+    private boolean izquierda;
+    private boolean derecha;
+    private boolean correr;
+    private boolean salir;
 
     // Método que actualiza el estado de las variables públicas según el estado de
     // las teclas
@@ -44,6 +44,30 @@ public class Keyboard implements KeyListener {
     // caso)
     public void keyTyped(KeyEvent e) {
 
+    }
+
+    public boolean isArriba() {
+        return arriba;
+    }
+
+    public boolean isAbajo() {
+        return abajo;
+    }
+
+    public boolean isIzquierda() {
+        return izquierda;
+    }
+
+    public boolean isDerecha() {
+        return derecha;
+    }
+
+    public boolean isCorrer() {
+        return correr;
+    }
+
+    public boolean isSalir() {
+        return salir;
     }
 
 }

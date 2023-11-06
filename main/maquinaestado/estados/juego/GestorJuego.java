@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import control.GestorControles;
+import entes.Jugador;
 import herramientas.CargadorRecursos;
 import mapas.Mapa;
 import maquinaestado.EstadoJuego;
@@ -15,15 +17,20 @@ import sprites.SpritesSheet;
  */
 public class GestorJuego implements EstadoJuego {
 
-    private GestorMapa gm;
-    // SpritesSheet ss = new SpritesSheet("recursos/imagenes/hojatexturas/1.png",
-    // 32, true);
-
-    // String texto = CargadorRecursos.leerArchivoTexto("texto/mapa.txt");
-
     Mapa mapa = new Mapa("texto/mapa.txt");
 
+    Jugador jugador = new Jugador(1, 1);
+
     public void actualizar() {
+        if (GestorControles.keyboard.isArriba()) {
+            jugador.setPosicionY(jugador.getPosicionY() - 1);
+        } else if (GestorControles.keyboard.isAbajo()) {
+            jugador.setPosicionY(jugador.getPosicionY() + 1);
+        } else if (GestorControles.keyboard.isDerecha()) {
+            jugador.setPosicionX(jugador.getPosicionX() + 1);
+        } else if (GestorControles.keyboard.isIzquierda()) {
+            jugador.setPosicionX(jugador.getPosicionX() - 1);
+        }
 
     }
 
@@ -34,7 +41,11 @@ public class GestorJuego implements EstadoJuego {
      * @param g El objeto Graphics utilizado para dibujar.
      */
     public void dibujar(Graphics g) {
-        mapa.dibujar(g);
+        mapa.dibujar(g, (int) jugador.getPosicionX(), (int) jugador.getPosicionY());
+        jugador.dibujar(g);
+        g.setColor(Color.RED);
+        g.drawString("x = " + jugador.getPosicionX(), 20, 20);
+        g.drawString("y = " + jugador.getPosicionY(), 20, 30);
 
     }
 
