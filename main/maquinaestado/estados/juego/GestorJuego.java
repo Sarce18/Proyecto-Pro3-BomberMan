@@ -19,7 +19,7 @@ public class GestorJuego implements EstadoJuego {
 
     Mapa mapa = new Mapa("texto/mapa.txt");
 
-    Jugador jugador = new Jugador(1, 1);
+    Jugador jugador = new Jugador(1, 1, mapa);
 
     public void actualizar() {
         jugador.actualizar();
