@@ -22,15 +22,7 @@ public class GestorJuego implements EstadoJuego {
     Jugador jugador = new Jugador(1, 1);
 
     public void actualizar() {
-        if (GestorControles.keyboard.isArriba()) {
-            jugador.setPosicionY(jugador.getPosicionY() - 1);
-        } else if (GestorControles.keyboard.isAbajo()) {
-            jugador.setPosicionY(jugador.getPosicionY() + 1);
-        } else if (GestorControles.keyboard.isDerecha()) {
-            jugador.setPosicionX(jugador.getPosicionX() + 1);
-        } else if (GestorControles.keyboard.isIzquierda()) {
-            jugador.setPosicionX(jugador.getPosicionX() - 1);
-        }
+        jugador.actualizar();
 
     }
 
