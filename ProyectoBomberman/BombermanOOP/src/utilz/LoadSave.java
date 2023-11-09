@@ -2,8 +2,11 @@ package utilz;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -11,11 +14,13 @@ import main.Game;
 
 public class LoadSave {
 
-	public static final String PLAYER_ATLAS = "bomber1.png";
+	public static final String PLAYER_ATLAS = "bomber2.png";
 	//public static final String PLAYER_ATLAS = "player_sprites.png";
-	public static final String LEVEL_ATLAS = "outside_sprites.png";
+	public static final String LEVEL_ATLAS = "outside.png";
 	public static final String LEVEL_ONE_DATA = "level_one_data.png";
 	public static final String ICON = "icon.png";
+	public static final String IDLEP = "p1.png";
+	public static final String BACKGROUND = "playing_bg.png";
 
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;
@@ -49,5 +54,36 @@ public class LoadSave {
 			}
 		return lvlData;
 
+	}
+
+	public static BufferedImage[] GetAllLevels() {
+		URL url = LoadSave.class.getResource("/lvls");
+		File file = null;
+
+		try {
+			file = new File(url.toURI());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+
+		File[] files = file.listFiles();
+		File[] filesSorted = new File[files.length];
+
+		for(int i = 0; i < filesSorted.length; i++)
+			for(int j = 0; j < files.length; j++){
+				if(files[j].getName().equals((i + 1) + ".png"))
+					filesSorted[i] = files[j];
+			}
+
+		BufferedImage[] imgs = new BufferedImage[filesSorted.length];
+
+		for(int i = 0;  i < imgs.length; i++)
+			try {
+				imgs[i] = ImageIO.read(filesSorted[i]);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		return imgs;
 	}
 }

@@ -1,9 +1,12 @@
 package main;
 
 import java.awt.Graphics;
+//import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 import entities.Player;
 import levels.LevelManager;
+import utilz.LoadSave;
 
 public class Game implements Runnable {
 
@@ -23,6 +26,14 @@ public class Game implements Runnable {
 	public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
 	public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
 
+	private BufferedImage backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.BACKGROUND);
+
+	private int xLvlOffset;
+	private int leftBorder = (int)(0.2 * Game.GAME_WIDTH);
+	private int rightBorder = (int)(0.8 * Game.GAME_WIDTH);
+	private int maxLvlOffsetX;
+
+
 	public Game() {
 		initClasses();
 
@@ -35,9 +46,9 @@ public class Game implements Runnable {
 
 	private void initClasses() {
 		levelManager = new LevelManager(this);
-		player = new Player(200, 200, (int) (32 * SCALE), (int) (48 * SCALE));
+		player = new Player(200, 200, (int) (32 * Game.SCALE), (int) (48 * Game.SCALE));
 		player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
-
+		player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
 	}
 
 	private void startGameLoop() {
@@ -45,14 +56,37 @@ public class Game implements Runnable {
 		gameThread.start();
 	}
 
+	//private void calcLvlOffset() {
+	//	maxLvlOffsetX = levelManager.getCurrentLevel().getLvlOffset();
+	//}
+
 	public void update() {
 		levelManager.update();
 		player.update();
+		checkCloseToBorder();
+
+	
+	}
+
+	private void checkCloseToBorder() {
+		int playerX = (int)player.getHitbox().width;
+		int diff = playerX - xLvlOffset;
+
+		if(diff > rightBorder)
+			xLvlOffset += diff - rightBorder;
+		else if (diff < leftBorder)
+			xLvlOffset += diff - leftBorder;
+
+		if(xLvlOffset > maxLvlOffsetX)
+			xLvlOffset = maxLvlOffsetX;
+		else if(xLvlOffset < 0)
+			xLvlOffset = 0;
 	}
 
 	public void render(Graphics g) {
-		levelManager.draw(g);
-		player.render(g);
+		g.drawImage(backgroundImg, 0, 0, GAME_WIDTH, GAME_HEIGHT, null);
+		levelManager.draw(g, xLvlOffset);
+		player.render(g, xLvlOffset);
 	}
 
 	@Override

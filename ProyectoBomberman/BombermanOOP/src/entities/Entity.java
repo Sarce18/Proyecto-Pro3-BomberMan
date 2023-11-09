@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
+import main.Game;
+
 public abstract class Entity {
 
 	protected float x, y;
@@ -19,15 +21,14 @@ public abstract class Entity {
 
 	}
 
-	protected void drawHitbox(Graphics g) {
-		// For debugging the hitbox
+	protected void drawHitbox(Graphics g, int xLvlOffset){
+		//debugging hitbox
 		g.setColor(Color.PINK);
-		g.drawRect((int) hitbox.x, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
-
+		g.drawRect((int)hitbox.x - xLvlOffset, (int)hitbox.y, (int)hitbox.width, (int)hitbox.height);
 	}
 
-	protected void initHitbox(float x, float y, float width, float height) {
-		hitbox = new Rectangle2D.Float(x, y, width, height);
+	protected void initHitbox(int width, int height) {
+		hitbox = new Rectangle2D.Float(x, y, (int)(width * Game.SCALE)-1, (int)(height * Game.SCALE)-1);
 	}
 
 //	protected void updateHitbox() {
